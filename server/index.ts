@@ -4,13 +4,13 @@ import express, { Request, Response } from "express";
 const app = express();
 app.use(express.json());
 
-/* Facebook Webhook Verify Token */
+/* VERIFY TOKEN */
 const VERIFY_TOKEN = "abc123";
 
-/* Facebook Page Access Token */
+/* PAGE ACCESS TOKEN */
 const PAGE_ACCESS_TOKEN = "EAAelfDZA64B0BQ8JL9yYE0EiSMYv5QkZBIR1FRHcNY6ETFNj6oZBQ8sxSUt8ZBc8AhDzq8vsId8ZBKxnGwxSft25rPlZAfEo0wZCEzS4zNtT7txhIgXnMM2npZCxq9bSPzRZBDZBV1nSBbyurtUzRelthl0FelS0lDFiGTkuovdNJz6ZCZBcZAnFUIwEhAS71Isi5n3VtIUNVnQZDZD";
 
-/* Webhook verification */
+/* WEBHOOK VERIFY */
 app.get("/webhook", (req: Request, res: Response) => {
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
@@ -24,7 +24,7 @@ app.get("/webhook", (req: Request, res: Response) => {
   }
 });
 
-/* Receive messages from Messenger */
+/* RECEIVE MESSAGE */
 app.post("/webhook", async (req: Request, res: Response) => {
   const body = req.body;
 
@@ -46,24 +46,21 @@ app.post("/webhook", async (req: Request, res: Response) => {
   }
 });
 
-/* Function to send message back to user */
+/* SEND MESSAGE */
 async function sendMessage(senderId: string, text: string) {
-  await fetch(
-    `https://graph.facebook.com/v18.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        recipient: { id: senderId },
-        message: { text: text },
-      }),
-    }
-  );
+  await fetch(`https://graph.facebook.com/v18.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      recipient: { id: senderId },
+      message: { text: text },
+    }),
+  });
 }
 
-/* Start server (Railway compatible) */
+/* START SERVER */
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
