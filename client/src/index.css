@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Clean Minimal Monochrome Palette */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+  
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 9%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 9%;
+
+  --radius: 1rem;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+}
+
+.dark {
+  --background: 0 0% 5%;
+  --foreground: 0 0% 98%;
+  
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 98%;
+  
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 98%;
+  
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 98%;
+  
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 65%;
+  
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 0 0% 83.1%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary;
+    font-family: var(--font-sans);
+    /* Soft ambient noise texture for ultra-premium minimal feel */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+  
+  /* Serif elements for editorial touch */
+  .font-editorial {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom scrollbar for a polished feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Utilitarian animations */
+.glass-panel {
+  @apply bg-background/80 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/5;
+}
+
+.masonry-grid {
+  display: flex;
+  width: auto;
+  margin-left: -1.5rem; 
+}
+.masonry-grid_column {
+  padding-left: 1.5rem; 
+  background-clip: padding-box;
+}
