@@ -1,6 +1,5 @@
 ```ts
 import express, { Request, Response } from "express";
-import fetch from "node-fetch";
 
 const app = express();
 app.use(express.json());
@@ -37,7 +36,6 @@ app.post("/webhook", async (req: Request, res: Response) => {
 
       if (event.message && event.message.text) {
         const text = event.message.text;
-
         await sendMessage(senderId, "You said: " + text);
       }
     }
@@ -48,7 +46,7 @@ app.post("/webhook", async (req: Request, res: Response) => {
   }
 });
 
-/* SEND MESSAGE FUNCTION */
+/* SEND MESSAGE */
 async function sendMessage(senderId: string, text: string) {
   await fetch(
     `https://graph.facebook.com/v18.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
