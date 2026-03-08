@@ -1,5 +1,5 @@
+```ts
 import express, { Request, Response } from "express";
-import fetch from "node-fetch";
 
 const app = express();
 app.use(express.json());
@@ -8,8 +8,7 @@ app.use(express.json());
 const VERIFY_TOKEN = "abc123";
 
 /* Facebook Page Access Token */
-const PAGE_ACCESS_TOKEN =
-  "EAAelfDZA64B0BQ8JL9yYE0EiSMYv5QkZBIR1FRHcNY6ETFNj6oZBQ8sxSUt8ZBc8AhDzq8vsId8ZBKxnGwxSft25rPlZAfEo0wZCEzS4zNtT7txhIgXnMM2npZCxq9bSPzRZBDZBV1nSBbyurtUzRelthl0FelS0lDFiGTkuovdNJz6ZCZBcZAnFUIwEhAS71Isi5n3VtIUNVnQZDZD";
+const PAGE_ACCESS_TOKEN = "EAAelfDZA64B0BQ8JL9yYE0EiSMYv5QkZBIR1FRHcNY6ETFNj6oZBQ8sxSUt8ZBc8AhDzq8vsId8ZBKxnGwxSft25rPlZAfEo0wZCEzS4zNtT7txhIgXnMM2npZCxq9bSPzRZBDZBV1nSBbyurtUzRelthl0FelS0lDFiGTkuovdNJz6ZCZBcZAnFUIwEhAS71Isi5n3VtIUNVnQZDZD";
 
 /* Webhook verification */
 app.get("/webhook", (req: Request, res: Response) => {
@@ -60,11 +59,14 @@ async function sendMessage(senderId: string, text: string) {
         recipient: { id: senderId },
         message: { text: text },
       }),
-    },
+    }
   );
 }
 
-/* Start server */
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+/* Start server (Railway compatible) */
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+```
